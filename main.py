@@ -34,6 +34,24 @@ def view_tasks(tasks):
         print(f"{i}. {task['title']} [{status}]")
 
 
+def delete_task(tasks):
+    view_tasks(tasks)
+
+    num = int(input("Enter task number to delete: "))
+    index = num - 1
+
+    del tasks[index]
+
+
+def mark_done(tasks):
+    view_tasks(tasks)
+
+    num = int(input("Enter task number to mark as done: "))
+    index = num - 1
+
+    tasks[index]["done"] = True
+
+
 def main():
     tasks = load_tasks()
 
@@ -42,6 +60,8 @@ def main():
         print("1 - Add task")
         print("2 - View tasks")
         print("3 - Exit")
+        print("4 - Delete task")
+        print("5 - Mark as done")
 
         choice = input("Choose the action: ")
 
@@ -56,6 +76,14 @@ def main():
         elif choice == "3":
             print("Bye")
             break
+
+        elif choice == "4":
+            delete_task(tasks)
+            save_tasks(tasks)
+
+        elif choice == "5":
+            mark_done(tasks)
+            save_tasks(tasks)
 
         else:
             print("Invalid choice!")
